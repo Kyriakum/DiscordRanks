@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 public class LinkManager {
 
@@ -47,4 +48,13 @@ public class LinkManager {
         return false;
     }
 
+    public void setupLink(UUID uuid, User user){
+        YamlConfiguration conf = ConfManager.getConfiguration(f);
+        try {
+            conf.set(uuid.toString(),user.getId());
+            conf.save(f);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

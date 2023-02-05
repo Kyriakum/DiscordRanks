@@ -1,5 +1,6 @@
 package kyriakum.com.main;
 
+import kyriakum.com.main.commands.LinkCommand;
 import kyriakum.com.main.manager.LinkManager;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -27,6 +28,7 @@ public final class Main extends JavaPlugin {
         builder.setActivity(Activity.watching("your ranks"));
         builder.enableIntents(GatewayIntent.MESSAGE_CONTENT);
         builder.addEventListeners(new EventListener(this));
+        getCommand("verify").setExecutor(new LinkCommand(this));
         jda = builder.build();
       //  guild = jda.getGuildById(getConfig().getLong("guild"));
     }

@@ -11,12 +11,13 @@ public class VerificationChannel {
 
     private UUID uuid;
     private User user;
-    private int code;
+    private String code;
 
     public VerificationChannel(UUID uuid, User user){
         this.uuid = uuid;
         this.user = user;
-        code = new Random().nextInt(800000) + 200000;
+        char c = (char)(new Random().nextInt(26) + 'A');
+        code = new Random().nextInt(800000) + 200000 + String.valueOf(c);
     }
 
     public UUID getUuid() {
@@ -27,7 +28,7 @@ public class VerificationChannel {
         return user;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 }
