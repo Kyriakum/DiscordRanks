@@ -4,15 +4,18 @@ import kyriakum.com.main.entities.VerificationChannel;
 import net.dv8tion.jda.api.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class VerificationManager {
 
     private static final ArrayList<VerificationChannel> verifications = new ArrayList<>();
 
-    public static ArrayList<VerificationChannel> getVerifications() { return verifications; }
+    public static List<VerificationChannel> getVerifications() { return verifications; }
     public static void addVerification(VerificationChannel chan) { verifications.add(chan);}
     public static boolean removeVerification(VerificationChannel chan) { return verifications.remove(chan);}
+
+    private VerificationManager() { throw new IllegalStateException(""); }
 
     public static VerificationChannel getSpecificVer(UUID uuid){
         for(VerificationChannel chan : verifications){

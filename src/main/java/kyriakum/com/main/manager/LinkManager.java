@@ -4,7 +4,6 @@ import kyriakum.com.main.Main;
 import net.dv8tion.jda.api.entities.User;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
@@ -57,7 +56,6 @@ public class    LinkManager {
     }
 
     public User getUser(Player player){
-        YamlConfiguration conf = ConfManager.getConfiguration(f);
         String id = conf.getString(player.getUniqueId().toString());
         return main.getJda().getUserById(id);
     }

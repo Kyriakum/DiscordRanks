@@ -2,7 +2,6 @@ package kyriakum.com.main;
 
 import kyriakum.com.main.entities.VerificationChannel;
 import kyriakum.com.main.manager.VerificationManager;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.bukkit.Bukkit;

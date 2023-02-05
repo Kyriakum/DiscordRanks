@@ -2,7 +2,6 @@ package kyriakum.com.main.commands;
 
 import kyriakum.com.main.Main;
 import kyriakum.com.main.entities.VerificationChannel;
-import kyriakum.com.main.manager.LinkManager;
 import kyriakum.com.main.manager.RankManager;
 import kyriakum.com.main.manager.VerificationManager;
 import org.bukkit.ChatColor;
@@ -17,8 +16,8 @@ public class LinkCommand implements CommandExecutor {
 
     public LinkCommand(Main main){this.main = main;}
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender instanceof Player){
+    public boolean  onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if(!(sender instanceof Player)){ return true; }
             Player p = (Player) sender;
             if(command.getName().equalsIgnoreCase("verify")){
                 if(main.getLinkManager().playerExists(p)) {
@@ -49,7 +48,7 @@ public class LinkCommand implements CommandExecutor {
                     p.sendMessage(ChatColor.RED + "The code is incorrect!");
                 }
             }
-        }
+
         return false;
     }
 }
