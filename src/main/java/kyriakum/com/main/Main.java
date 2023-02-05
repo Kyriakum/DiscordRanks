@@ -14,6 +14,8 @@ import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.logging.Logger;
+
 public final class Main extends JavaPlugin {
 
     private JDA jda;
@@ -21,17 +23,18 @@ public final class Main extends JavaPlugin {
     private Guild guild;
     private LuckPerms luckPerms;
     private RankManager rankManager;
+    private final Logger log = Logger.getLogger("Minecraft");
     @Override
     public void onEnable() {
 
         saveDefaultConfig();
         if(getConfig().getString("token") == null){
-            System.out.println("No token specified!");
+           log.info("No token specified!");
             setEnabled(false);
             return;
         }
         if(getConfig().get("guildID") == null){
-            System.out.println("No guild ID specified!");
+            log.info("No guild ID specified!");
             setEnabled(false);
             return;
         }
@@ -39,12 +42,13 @@ public final class Main extends JavaPlugin {
         luckPerms = LuckPermsProvider.get();
         linkManager = new LinkManager(this);
         rankManager = new RankManager(this);
-        LuckPermsListeners perms = new LuckPermsListeners(this);
+        new LuckPermsListeners(this);
         setupDiscord();
         }
 
     @Override
-    public void onDisable() {}
+    public void onDisable() {//Empty
+         }
     public LinkManager getLinkManager() {return linkManager; }
     public JDA getJda(){ return jda; }
     public Guild getGuild(){ return guild; }
@@ -61,6 +65,7 @@ public final class Main extends JavaPlugin {
         try {
             jda.awaitReady();
         } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         String s = getConfig().getString("guildID");
         guild = jda.getGuildById(s);
