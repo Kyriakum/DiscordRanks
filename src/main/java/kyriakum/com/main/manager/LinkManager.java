@@ -57,4 +57,12 @@ public class LinkManager {
             e.printStackTrace();
         }
     }
+
+    public User getUser(Player player){
+        YamlConfiguration conf = ConfManager.getConfiguration(f);
+        String id = conf.getString(player.getUniqueId().toString());
+        return main.getJda().getUserById(id);
+    }
+
+
 }

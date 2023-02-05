@@ -3,6 +3,7 @@ package kyriakum.com.main.commands;
 import kyriakum.com.main.Main;
 import kyriakum.com.main.entities.VerificationChannel;
 import kyriakum.com.main.manager.LinkManager;
+import kyriakum.com.main.manager.RankManager;
 import kyriakum.com.main.manager.VerificationManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -38,8 +39,12 @@ public class LinkCommand implements CommandExecutor {
                 String code = args[0];
                 if(code.equals(ver.getCode())){
                     main.getLinkManager().setupLink(p.getUniqueId(), ver.getUser());
+                     p.sendMessage(ChatColor.GREEN + "You successfully linked your minecraft account to the discord server!");
+                    RankManager r = main.getRankManager();
+                    String rank = r.getRank(p);
+                    r.setRank(rank, ver.getUser());
                     VerificationManager.removeVerification(ver);
-                    p.sendMessage(ChatColor.GREEN + "You successfully linked your minecraft account to the discord server!");
+
                 } else {
                     p.sendMessage(ChatColor.RED + "The code is incorrect!");
                 }
