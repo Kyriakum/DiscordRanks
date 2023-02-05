@@ -1,0 +1,4 @@
+name: DiscordRanks
+version: '${project.version}'
+main: kyriakum.com.main.Main
+api-version: 1.12.2
