@@ -13,7 +13,7 @@ import org.bukkit.entity.Player;
 
 public class LinkCommand implements CommandExecutor {
 
-    private Main main;
+    private final Main main;
 
     public LinkCommand(Main main){this.main = main;}
     @Override

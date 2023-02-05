@@ -22,12 +22,12 @@ import java.util.Optional;
 
 public class LuckPermsListeners {
 
-    private Main main;
+    private final Main main;
 
     public LuckPermsListeners(Main main){
         this.main = main;
         EventBus eventBus = main.getLuckPerms().getEventBus();
-        eventBus.subscribe(this.main, NodeAddEvent.class, this::groupUserChange);;
+        eventBus.subscribe(this.main, NodeAddEvent.class, this::groupUserChange);
         eventBus.subscribe(this.main, NodeRemoveEvent.class, this::groupUserChange2);
     }
 

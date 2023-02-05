@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.User;
 import org.bukkit.entity.Player;
 
 public class RankManager {
-    private Main main;
+    private final Main main;
     public RankManager(Main main){
         this.main = main;
     }
@@ -15,7 +15,7 @@ public class RankManager {
 
         Role role = main.getGuild().getRolesByName(rank,true).get(0);
         if(role == null) {
-            System.out.println("Error occured! Role doesn't exist!"); return;
+            System.out.println("Error occurred! Role doesn't exist!"); return;
         }
         main.getGuild().addRoleToMember(user, role).queue();
     }
@@ -24,7 +24,7 @@ public class RankManager {
 
         Role role = main.getGuild().getRolesByName(rank,true).get(0);
         if(role == null) {
-            System.out.println("Error occured! Role doesn't exist!"); return;
+            System.out.println("Error occurred! Role doesn't exist!"); return;
         }
         main.getGuild().removeRoleFromMember(user, role).queue();
     }

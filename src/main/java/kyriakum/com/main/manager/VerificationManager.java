@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public class VerificationManager {
 
-    private static ArrayList<VerificationChannel> verifications = new ArrayList<>();
+    private static final ArrayList<VerificationChannel> verifications = new ArrayList<>();
 
     public static ArrayList<VerificationChannel> getVerifications() { return verifications; }
     public static void addVerification(VerificationChannel chan) { verifications.add(chan);}

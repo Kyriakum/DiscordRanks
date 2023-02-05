@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public class EventListener extends ListenerAdapter {
 
-    private Main main;
+    private final Main main;
 
     public EventListener(Main main){
         this.main = main;

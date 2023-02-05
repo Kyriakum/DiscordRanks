@@ -9,9 +9,9 @@ import java.util.UUID;
 
 public class VerificationChannel {
 
-    private UUID uuid;
-    private User user;
-    private String code;
+    private final UUID uuid;
+    private final User user;
+    private final String code;
 
     public VerificationChannel(UUID uuid, User user){
         this.uuid = uuid;

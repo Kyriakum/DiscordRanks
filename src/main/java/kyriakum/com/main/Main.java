@@ -24,20 +24,33 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-            saveDefaultConfig();
-            luckPerms = LuckPermsProvider.get();
-                linkManager = new LinkManager(this);
-                rankManager = new RankManager(this);
-            if(getConfig().getString("token") == null){
-                System.out.println("No token specified!");
-                setEnabled(false);
-                return;
-            }
+        saveDefaultConfig();
+        if(getConfig().getString("token") == null){
+            System.out.println("No token specified!");
+            setEnabled(false);
+            return;
+        }
         if(getConfig().get("guildID") == null){
             System.out.println("No guild ID specified!");
             setEnabled(false);
             return;
         }
+
+        luckPerms = LuckPermsProvider.get();
+        linkManager = new LinkManager(this);
+        rankManager = new RankManager(this);
+        LuckPermsListeners perms = new LuckPermsListeners(this);
+        setupDiscord();
+        }
+
+    @Override
+    public void onDisable() {}
+    public LinkManager getLinkManager() {return linkManager; }
+    public JDA getJda(){ return jda; }
+    public Guild getGuild(){ return guild; }
+    public LuckPerms getLuckPerms() { return luckPerms; }
+    public RankManager getRankManager() { return rankManager;}
+    private void setupDiscord(){
         JDABuilder builder = JDABuilder.createDefault(getConfig().getString("token")).setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS).setChunkingFilter(ChunkingFilter.ALL);
         builder.setActivity(Activity.watching("your ranks"));
@@ -56,14 +69,5 @@ public final class Main extends JavaPlugin {
             setEnabled(false);
             return;
         }
-        LuckPermsListeners perms = new LuckPermsListeners(this);
-        }
-
-    @Override
-    public void onDisable() {}
-    public LinkManager getLinkManager() {return linkManager; }
-    public JDA getJda(){ return jda; }
-    public Guild getGuild(){ return guild; }
-    public LuckPerms getLuckPerms() { return luckPerms; }
-    public RankManager getRankManager() { return rankManager;}
+    }
 }

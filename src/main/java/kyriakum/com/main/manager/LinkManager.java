@@ -4,26 +4,23 @@ import kyriakum.com.main.Main;
 import net.dv8tion.jda.api.entities.User;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public class LinkManager {
+public class    LinkManager {
 
 
     private Main main;
-    private File f;
-
+    private final File f;
+    private final YamlConfiguration conf;
     public LinkManager(Main main){
-        setup(main);
-    }
-
-
-    private void setup(Main main){
         this.main = main;
         File f = new File(main.getDataFolder() + "/data.yml");
         this.f = f;
+        this.conf = YamlConfiguration.loadConfiguration(f);
         if(!f.exists()){
             try {
                 f.createNewFile();
@@ -33,14 +30,16 @@ public class LinkManager {
         }
     }
 
+
+
+
+
     public boolean playerExists(Player player){
-        YamlConfiguration conf = ConfManager.getConfiguration(f);
         return (conf.getString(player.getUniqueId().toString()) != null);
     }
 
     public boolean userExists(User user){
-        YamlConfiguration conf = ConfManager.getConfiguration(f);
-        for(String s : conf.getConfigurationSection("").getKeys(false)) {
+         for(String s : conf.getConfigurationSection("").getKeys(false)) {
             if(conf.get(s).equals(user.getId())){
                 return true;
             }
@@ -49,8 +48,7 @@ public class LinkManager {
     }
 
     public void setupLink(UUID uuid, User user){
-        YamlConfiguration conf = ConfManager.getConfiguration(f);
-        try {
+       try {
             conf.set(uuid.toString(),user.getId());
             conf.save(f);
         } catch (IOException e) {

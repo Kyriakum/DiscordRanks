@@ -10,7 +10,6 @@ public class ConfManager {
 
 
     public static YamlConfiguration getConfiguration(File f){
-        YamlConfiguration conf = YamlConfiguration.loadConfiguration(f);
-        return conf;
+        return YamlConfiguration.loadConfiguration(f);
     }
 }
