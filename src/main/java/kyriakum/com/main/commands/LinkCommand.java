@@ -15,6 +15,7 @@ public class LinkCommand implements CommandExecutor {
     private final Main main;
 
     public LinkCommand(Main main){this.main = main;}
+
     @Override
     public boolean  onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(!(sender instanceof Player)){ return true; }

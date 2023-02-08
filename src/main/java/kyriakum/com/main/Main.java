@@ -33,6 +33,7 @@ public final class Main extends JavaPlugin {
             setEnabled(false);
             return;
         }
+
         if(getConfig().get("guildID") == null){
             log.info("No guild ID specified!");
             setEnabled(false);
@@ -54,6 +55,8 @@ public final class Main extends JavaPlugin {
     public Guild getGuild(){ return guild; }
     public LuckPerms getLuckPerms() { return luckPerms; }
     public RankManager getRankManager() { return rankManager;}
+    public Logger getLog() {return log;}
+
     private void setupDiscord(){
         JDABuilder builder = JDABuilder.createDefault(getConfig().getString("token")).setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS).setChunkingFilter(ChunkingFilter.ALL);
@@ -70,7 +73,7 @@ public final class Main extends JavaPlugin {
         String s = getConfig().getString("guildID");
         guild = jda.getGuildById(s);
         if(guild == null) {
-            System.out.println("The guild ID is incorrect!");
+            log.info("The guild ID is incorrect!");
             setEnabled(false);
             return;
         }

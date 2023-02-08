@@ -15,26 +15,19 @@ public class EventListener extends ListenerAdapter {
         this.main = main;
     }
 
-
-
     @Override
     public void onMessageReceived(MessageReceivedEvent e){
         String[] args = e.getMessage().getContentRaw().split(" ");
 
-
         if(args[0].equalsIgnoreCase("!link")){
-
-
             if(main.getLinkManager().userExists(e.getAuthor())) {
                 e.getChannel().sendMessage(e.getAuthor().getAsMention() + " you have already linked your minecraft account!").queue();
                 return;
             }
-
             if(VerificationManager.verAlreadyGenerated(e.getAuthor())){
                 e.getChannel().sendMessage(e.getAuthor().getAsMention() + " you already requested a verification code!").queue();
                 return;
             }
-
             if(args.length < 2) {
                 e.getChannel().sendMessage(e.getAuthor().getAsMention() + " you didn't specify a minecraft username!").queue();
                 return;
@@ -44,22 +37,17 @@ public class EventListener extends ListenerAdapter {
                 e.getChannel().sendMessage(e.getAuthor().getAsMention() + " this player is not online!").queue();
                 return;
             }
-
             if(main.getLinkManager().playerExists(target)){
                 e.getChannel().sendMessage(e.getAuthor().getAsMention() + " this player is already linked!").queue();
                 return;
             }
-
-
-            if(VerificationManager.verAlreadyGenerated(target.getUniqueId())){
+            if(VerificationManager.verAlreadyGenerated(target.getUniqueId()))
             VerificationManager.removeVerification(VerificationManager.getSpecificVer(target.getUniqueId()));
-            }
 
-
-                e.getChannel().sendMessage(e.getAuthor().getAsMention() + " your code has been sent to your DMs!").queue();
-                VerificationChannel channel = new VerificationChannel(target.getUniqueId(), e.getAuthor());
-                VerificationManager.addVerification(channel);
-                e.getAuthor().openPrivateChannel().complete().sendMessage("Your verification code: " + channel.getCode() + "\ntype /verify (code) in minecraft to verify your account!").queue();
+            e.getChannel().sendMessage(e.getAuthor().getAsMention() + " your code has been sent to your DMs!").queue();
+            VerificationChannel channel = new VerificationChannel(target.getUniqueId(), e.getAuthor());
+            VerificationManager.addVerification(channel);
+            e.getAuthor().openPrivateChannel().complete().sendMessage("Your verification code: " + channel.getCode() + "\ntype /verify (code) in minecraft to verify your account!").queue();
 
         }
     }

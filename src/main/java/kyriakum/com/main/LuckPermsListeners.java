@@ -32,7 +32,6 @@ public class LuckPermsListeners {
             if(node instanceof InheritanceNode){
                 String groupName = ((InheritanceNode) node).getGroupName();
 
-
                main.getLuckPerms().getGroupManager().getLoadedGroups().forEach(g -> {
                    String a = g.getName();
                    main.getRankManager().removeRank(a, main.getLinkManager().getUser(player));
